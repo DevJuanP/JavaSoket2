@@ -3,7 +3,7 @@ package cibertec;
 import java.io.*;
 import java.net.*;
 
-// Servidor TCP simple: escucha en un puerto y devuelve ("eco") lo que recibe.
+// Servidor TCP simple: escucha en un puerto y responde a cada mensaje recibido.
 public class ServerStream {
     private static final int PUERTO = 5000;
 
@@ -23,16 +23,17 @@ public class ServerStream {
                 );
                 PrintWriter salida = new PrintWriter(cliente.getOutputStream(), true);
 
-                // Lee el mensaje, lo muestra y lo devuelve con el prefijo "Echo: ".
+                // Lee el mensaje, lo muestra y responde confirmando su recepción.
                 String mensaje = entrada.readLine();
                 System.out.println("Mensaje recibido: " + mensaje);
 
-                salida.println("Echo: " + mensaje);
+                salida.println("Hola cliente, procesare tu mensaje: '" + mensaje + "'");
 
                 cliente.close();
             }
-        } catch (IOException e) {
+        } catch (Exception e) {
             // Si el puerto está ocupado o se corta una conexión, muestra el error.
+            System.out.println("Error en el servidor: " + e.getMessage());
             e.printStackTrace();
         }
     }

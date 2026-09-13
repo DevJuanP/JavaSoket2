@@ -20,14 +20,17 @@ public class ClientStream {
             );
 
             // Envía el saludo y espera la respuesta del servidor.
-            salida.println("Hola desde el cliente!");
+            String mensaje = "Hola desde el cliente!";
+            salida.println(mensaje);
+            System.out.println("Mensaje enviado: " + mensaje);
 
             String respuesta = entrada.readLine();
             System.out.println("Respuesta del servidor: " + respuesta);
 
             socket.close();
-        } catch (IOException e) {
+        } catch (Exception e) {
             // Si el servidor está apagado o el puerto es incorrecto, muestra el error.
+            System.out.println("Error en el cliente: " + e.getMessage());
             e.printStackTrace();
         }
     }
